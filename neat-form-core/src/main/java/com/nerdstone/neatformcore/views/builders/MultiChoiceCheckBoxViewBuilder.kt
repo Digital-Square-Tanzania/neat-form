@@ -67,13 +67,6 @@ open class MultiChoiceCheckBoxViewBuilder(final override val nFormView: NFormVie
             text = nFormSubViewProperty.text
             setTag(R.id.field_name, nFormSubViewProperty.name)
             setTag(R.id.is_checkbox_option, true)
-            try {
-                if (!nFormSubViewProperty.viewAttributes.isNullOrEmpty() && nFormSubViewProperty.viewAttributes!!.containsKey(MultiChoiceCheckBoxProperties.CHECKED.name.toLowerCase())) {
-                    isChecked = nFormSubViewProperty.viewAttributes!!.get(MultiChoiceCheckBoxProperties.CHECKED.name.toLowerCase()).toString().toBoolean()
-                }
-            } catch (e: java.lang.Exception) {
-                Timber.e(e)
-            }
             if (multiChoiceCheckBox.viewProperties.getResourceFromAttribute().isNullOrEmpty())
                 TextViewCompat.setTextAppearance(this, R.style.checkBoxStyle)
             setOnCheckedChangeListener { compoundButton, isChecked ->
@@ -102,6 +95,13 @@ open class MultiChoiceCheckBoxViewBuilder(final override val nFormView: NFormVie
             checkBoxTextSize?.also { textSize = it }
         }
         multiChoiceCheckBox.addView(checkBox)
+        try {
+            if (!nFormSubViewProperty.viewAttributes.isNullOrEmpty() && nFormSubViewProperty.viewAttributes!!.containsKey(MultiChoiceCheckBoxProperties.CHECKED.name.toLowerCase())) {
+                checkBox.isChecked = nFormSubViewProperty.viewAttributes!!.get(MultiChoiceCheckBoxProperties.CHECKED.name.toLowerCase()).toString().toBoolean()
+            }
+        } catch (e: java.lang.Exception) {
+            Timber.e(e)
+        }
     }
 
     /**

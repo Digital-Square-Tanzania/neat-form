@@ -101,7 +101,8 @@
             "text": "Choose referral facility",
             "searchable": "Choose referral facility"
           },
-          "options": []
+          "options": [],
+          "required_status": "yes:Please specify referral facility"
         },
         {
           "name": "referral_appointment_date",
